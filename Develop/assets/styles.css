@@ -5,3 +5,7 @@
 h1 {
     color: blueviolet;
 }
+
+.gradient-color{
+    background-image: linear-gradient(to right, rgb(4, 172, 228) , rgb(2, 2, 194));
+}

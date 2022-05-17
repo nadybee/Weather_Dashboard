@@ -18,8 +18,57 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <h1>I am ready to build!</h1>
-    <button class="btn btn-primary"> I am a bootstrap button</button>
+<header class="navbar navbar-light  gradient-color">
+    <h1 class="mx-auto text-white p-1 "> Weather Dashboard</h1>
+</header>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-3 p-1">
+        <div class="form-group">
+            <label for="search-city" class=""> <h5> Search for a City:</h5> </label>
+            <input type="text" class="form-control" id="search-city"   placeholder="Provo, UT">
+        </div>
+        <div class="btn btn-primary btn-block"> search</div>
+        <hr>
+        <div class="btn btn-secondary btn-block"> Austin</div>
+        <div class="btn btn-secondary btn-block"> Chicago</div>
+        <div class="btn btn-secondary btn-block"> New York</div>
+        <div class="btn btn-secondary btn-block"> Orlando</div>
+        <div class="btn btn-secondary btn-block"> San Francisco </div>
+        <div class="btn btn-secondary btn-block"> Seattle</div>
+        <div class="btn btn-secondary btn-block"> Denver</div>
+        <div class="btn btn-secondary btn-block"> Atlanta</div>
+
+
+       
+    </div>
+        <div class="col-9">
+            <div class="jumbotron bg-light border border-dark">
+                <div class="text-dark mx-auto p-5">here is where the searched city info goes</div>
+            </div>
+            <h3 class="py-2"> 5 Day Forecast:</h3>
+            <div class="card-deck">
+               
+                <div class="card bg-dark text-white">
+                    <div class="card-body">card 1</div>
+                </div>
+                <div class="card bg-dark text-white">
+                    <div class="card-body">card 2</div>
+                </div>
+                <div class="card bg-dark text-white">
+                    <div class="card-body">card 3</div>
+                </div>
+                <div class="card bg-dark text-white">
+                    <div class="card-body">card 4</div>
+                </div>
+                <div class="card bg-dark text-white">
+                    <div class="card-body">card 5</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
