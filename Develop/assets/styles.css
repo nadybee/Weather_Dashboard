@@ -10,3 +10,7 @@ h1 {
 .gradient-color{
     background-image: linear-gradient(to right, rgb(4, 172, 228) , rgb(77, 77, 187));
 }
+
+.background{
+    background-color: rgb(121, 119, 134);
+}
