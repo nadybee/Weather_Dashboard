@@ -14,3 +14,7 @@ h1 {
 .background{
     background-color: rgb(121, 119, 134);
 }
+
+#current-city{
+    text-transform: capitalize;
+}
