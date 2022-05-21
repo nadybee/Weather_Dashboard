@@ -21,36 +21,43 @@
 <header class="navbar navbar-light  gradient-color">
     <h1 class="mx-auto text-white p-1 "> Weather Dashboard</h1>
 </header>
-<div class="container my-3">
+<div class="container bg-light p-4 my-1">
     <div class="row">
         <div class="col-3 p-1">
         <div class="form-group">
             <label for="search-city" class=""> <h5> Search for a City:</h5> </label>
             <input type="text" class="form-control" id="search-city"   placeholder="Provo, UT">
         </div>
-        <div class="btn btn-primary btn-block"> search</div>
+        <div class="btn btn-primary btn-block" id="search-button"> search</div>
         <hr>
         <div id="city-buttons"> 
-        <div class="btn btn-dark btn-block" id="austin"> Austin</div>
+        <!-- <div class="btn btn-dark btn-block" id="austin"> Austin</div>
         <div class="btn btn-dark btn-block" id="chicago"> Chicago</div>
         <div class="btn btn-dark btn-block" id="newyork"> New York</div>
         <div class="btn btn-dark btn-block" id="orlando"> Orlando</div>
         <div class="btn btn-dark btn-block" id="sanfranciso"> San Francisco </div>
         <div class="btn btn-dark btn-block" id="seattle"> Seattle</div>
         <div class="btn btn-dark btn-block" id="denver"> Denver</div>
-        <div class="btn btn-dark btn-block" id="atlanta"> Atlanta</div>
+        <div class="btn btn-dark btn-block" id="atlanta"> Atlanta</div> -->
     </div>
 
        
     </div>
         <div class="col-9">
-            <div class="jumbotron bg-light border border-dark" id="jumbotron">
+            <div class="jumbotron bg-white border border-dark" id="jumbotron">
+                <div class="row"> 
+                    <div class="col-8"> 
                 <div id="current-city"> </div>
-                <div id="current-weather"></div>
+            
                 <div id="current-temp"></div>
                 <div id="current-wind"></div>
                 <div id="current-humid"></div>
                 <div id="uv-index"></div>
+            </div>
+            <div class="col-4"> 
+                <div id="current-weather"></div>
+            </div>
+            </div>
             </div>
             <h3 class="py-2"> 5 Day Forecast:</h3>
             <div class="card-deck">
@@ -60,6 +67,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script

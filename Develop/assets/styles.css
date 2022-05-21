@@ -15,6 +15,10 @@ h1 {
     background-color: rgb(121, 119, 134);
 }
 
-#current-city{
+.capitalize{
     text-transform: capitalize;
+}
+
+.bg-orange{
+    background-color: orange;
 }
