@@ -11,19 +11,25 @@ const searchInput = document.getElementById("search-city")
 const searchButton = document.getElementById("search-button")
 const cityButtons = document.getElementById("city-buttons")
 
-// console.log(todayDate)
+/** API KEYS */
 let apiKey = `de3fd87d905f359c0554152f4f41a427`
 //nadybee
 // let apiKey = `b03c84a6ad5bb97213f0e9baa8ef138b`
-let lat;
-let lon;
+
+/** DECLARED VARIABLES */
+let lat
+let lon
 let cardHTML = []
 let timezone
-let city;
+let city = "mombasa"
+
+/** FETCH CITY URL */
 const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
 
+/**------- FETCH FUNCTIONS--------- */
+
+/** FETCH CITY FUNCTION: called in startWeatherSearch() */
 const fetchCity = (URL) => {
-    
   fetch(URL)
     .then(function (response) {
       return response.json()
@@ -32,10 +38,12 @@ const fetchCity = (URL) => {
       console.log(data)
       lat = data[0].lat
       lon = data[0].lon
+
       const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${apiKey}&units=imperial`
       fetchWeather(weatherURL)
     })
 }
+/** FUNCTION TO FETCH WEATHER: CALLED IN fetchCity() */
 const fetchWeather = (URL) => {
   fetch(URL)
     .then(function (response) {
@@ -49,10 +57,7 @@ const fetchWeather = (URL) => {
     })
 }
 
-// fetchWeather(weatherURL)
-
-/** FUNCTION TO ADD CURRENT FORCAST */
-
+/** FUNCTION TO ADD CURRENT FORCAST:CALLED IN fetchWeather() */
 function currentForcast(data) {
   let currentIcon = data.current.weather[0].icon
 
@@ -64,13 +69,9 @@ function currentForcast(data) {
   currentUv.innerHTML = `<h4>UV index: <span class="badge"> ${data.current.uvi}</span></h4>`
 }
 
-
-
-
-
-/* FUNCTION TO ADD 5 DAY FORCAST CARDS TO PAGE */
+/* FUNCTION TO ADD 5 DAY FORCAST CARDS TO PAGE: called in fetchWeather() */
 function fiveDayForcast(data) {
-    cardHTML =[]
+  cardHTML = []
   for (let i = 0; i < 5; i++) {
     let dates = new Date(data.daily[i].dt * 1000)
     let dateFormat = dayjs(dates).format("ddd DD")
@@ -96,7 +97,7 @@ function fiveDayForcast(data) {
   document.querySelector(".card-deck").innerHTML = cardHTML.join("")
 }
 
-/** FUNCTION TO ADD CONDITIONAL STYLING TO UV INDEX */
+/** FUNCTION TO ADD CONDITIONAL STYLING TO UV INDEX: called in fetchWeather() */
 function styleUV(data) {
   const uvBadge = document.querySelector(".badge")
   //   console.log(uvBadge)
@@ -113,22 +114,12 @@ function styleUV(data) {
   }
 }
 
-searchInput.addEventListener("keypress", (event) => {
-  if (event.key === "Enter") {
-    searchButton.click()
-  }
-})
+/** SEARCH FOR A CITY FUNCTIONS */
 
-
-/** SET CITY and start weather search */
-const startWeatherSearch=()=>{
-    city =   searchInput.value.toLowerCase()
-    fetchCity(geoCodeURL)
-    searchHistory()
-}
-
+/** STORES SEARCH IN LOCAL STORAGE, RENDERS DISPLAYS SEARCH HISTORY:
+ * called in startWeatherSearch()
+ */
 function searchHistory() {
-
   let searchValue = { search: searchInput.value.toLowerCase() }
 
   localStorage.setItem(
@@ -141,6 +132,7 @@ function searchHistory() {
   searchInput.value = ""
 }
 
+/** RENDERS THE SEARCH HISTORY FROM LOCAL STORAGE: called in SearchHistory() */
 function renderSearchHistory() {
   let allSearch = []
   if (localStorage.length > 1) {
@@ -150,11 +142,10 @@ function renderSearchHistory() {
   }
   console.log(allSearch)
 
-  //   console.log(allSearch[allSearch.length-2].search)
-  // console.log(allSearch)
   return allSearch
 }
 
+/** SHOWS SEARCH HISTORY ON PAGE: called in searchHistory() */
 function showSearchHistory() {
   let searchArr = []
   let cityButtonHTML = []
@@ -162,9 +153,8 @@ function showSearchHistory() {
   const searchList = renderSearchHistory()
   for (let i = 0; i < searchList.length; i++) {
     if (!searchArr.includes(searchList[i])) {
-    searchArr.push(searchList[i].search)
+      searchArr.push(searchList[i].search)
     }
-
   }
   for (let j = 0; j < searchArr.length; j++) {
     cityButtonHTML.push(
@@ -175,4 +165,17 @@ function showSearchHistory() {
   cityButtons.innerHTML = cityButtonHTML.join("")
 }
 
+/**  start weather search */
+const startWeatherSearch = () => {
+  city = searchInput.value.toLowerCase()
+  fetchCity(geoCodeURL)
+  searchHistory()
+}
+/** ------------EVENT LISTENERS---------- */
+/** make enter work for the search */
+searchInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    searchButton.click()
+  }
+})
 searchButton.addEventListener("click", startWeatherSearch)
