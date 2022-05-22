@@ -15,14 +15,15 @@ const cityButtons = document.getElementById("city-buttons")
 let apiKey = `de3fd87d905f359c0554152f4f41a427`
 //nadybee
 // let apiKey = `b03c84a6ad5bb97213f0e9baa8ef138b`
-let lat
-let lon
-let city = "provo"
+let lat;
+let lon;
 let cardHTML = []
 let timezone
-
+let city;
 const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+
 const fetchCity = (URL) => {
+    
   fetch(URL)
     .then(function (response) {
       return response.json()
@@ -48,7 +49,6 @@ const fetchWeather = (URL) => {
     })
 }
 
-fetchCity(geoCodeURL)
 // fetchWeather(weatherURL)
 
 /** FUNCTION TO ADD CURRENT FORCAST */
@@ -64,8 +64,13 @@ function currentForcast(data) {
   currentUv.innerHTML = `<h4>UV index: <span class="badge"> ${data.current.uvi}</span></h4>`
 }
 
+
+
+
+
 /* FUNCTION TO ADD 5 DAY FORCAST CARDS TO PAGE */
 function fiveDayForcast(data) {
+    cardHTML =[]
   for (let i = 0; i < 5; i++) {
     let dates = new Date(data.daily[i].dt * 1000)
     let dateFormat = dayjs(dates).format("ddd DD")
@@ -113,15 +118,24 @@ searchInput.addEventListener("keypress", (event) => {
     searchButton.click()
   }
 })
-searchButton.addEventListener("click", searchHistory)
+
+
+/** SET CITY and start weather search */
+const startWeatherSearch=()=>{
+    city =   searchInput.value.toLowerCase()
+    fetchCity(geoCodeURL)
+    searchHistory()
+}
 
 function searchHistory() {
+
   let searchValue = { search: searchInput.value.toLowerCase() }
 
   localStorage.setItem(
     `searchValue_${searchInput.value}`,
     JSON.stringify(searchValue)
   )
+
   renderSearchHistory()
   showSearchHistory()
   searchInput.value = ""
@@ -144,19 +158,21 @@ function renderSearchHistory() {
 function showSearchHistory() {
   let searchArr = []
   let cityButtonHTML = []
-  let uniqueSearch = []
+
   const searchList = renderSearchHistory()
   for (let i = 0; i < searchList.length; i++) {
+    if (!searchArr.includes(searchList[i])) {
     searchArr.push(searchList[i].search)
-    // uniqueSearch = [...new Set(searchArr)]
-    uniqueSearch = searchArr
-    // console.log(uniqueSearch)
+    }
+
   }
-  for (let j = 0; j < uniqueSearch.length; j++) {
+  for (let j = 0; j < searchArr.length; j++) {
     cityButtonHTML.push(
-      `<div class="btn btn-dark btn-block capitalize" id="${uniqueSearch[j]}"> ${uniqueSearch[j]}</div>`
+      `<div class="btn btn-dark btn-block capitalize" id="${searchArr[j]}"> ${searchArr[j]}</div>`
     )
     // console.log(cityButtonHTML)
   }
   cityButtons.innerHTML = cityButtonHTML.join("")
 }
+
+searchButton.addEventListener("click", startWeatherSearch)
