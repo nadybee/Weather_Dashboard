@@ -21,44 +21,53 @@ let lat
 let lon
 let cardHTML = []
 let timezone
-let city = "mombasa"
+// let city="mombasa"
 
 /** FETCH CITY URL */
-const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+// const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
 
 /**------- FETCH FUNCTIONS--------- */
 
 /** FETCH CITY FUNCTION: called in startWeatherSearch() */
-const fetchCity = (URL) => {
+const fetchCity = (URL, city) => {
   fetch(URL)
     .then(function (response) {
       return response.json()
     })
     .then(function (data) {
       console.log(data)
+     if(data.length!=0){
+
       lat = data[0].lat
       lon = data[0].lon
 
       const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${apiKey}&units=imperial`
-      fetchWeather(weatherURL)
+      fetchWeather(weatherURL,city)
+     
+     }
+     else {
+         alert('Not a valid city, please try again')
+         searchInput.value =''
+     }
     })
 }
 /** FUNCTION TO FETCH WEATHER: CALLED IN fetchCity() */
-const fetchWeather = (URL) => {
+const fetchWeather = (URL,city) => {
   fetch(URL)
     .then(function (response) {
       return response.json()
     })
     .then(function (data) {
       console.log(data)
-      currentForcast(data)
+      currentForcast(data,city)
       styleUV(data)
       fiveDayForcast(data)
+      searchHistory()
     })
 }
 
 /** FUNCTION TO ADD CURRENT FORCAST:CALLED IN fetchWeather() */
-function currentForcast(data) {
+function currentForcast(data,city) {
   let currentIcon = data.current.weather[0].icon
 
   currentCity.innerHTML = `<div class="d-flex capitalize"> <h3> ${city} (${todayDate})</h3>`
@@ -121,11 +130,13 @@ function styleUV(data) {
  */
 function searchHistory() {
   let searchValue = { search: searchInput.value.toLowerCase() }
-
+if(searchValue.search != ''){ 
   localStorage.setItem(
     `searchValue_${searchInput.value}`,
     JSON.stringify(searchValue)
   )
+  }
+  
 
   renderSearchHistory()
   showSearchHistory()
@@ -135,7 +146,7 @@ function searchHistory() {
 /** RENDERS THE SEARCH HISTORY FROM LOCAL STORAGE: called in SearchHistory() */
 function renderSearchHistory() {
   let allSearch = []
-  if (localStorage.length > 1) {
+  if (localStorage.length >= 1) {
     for (let i = 0; i < localStorage.length; i++) {
       allSearch.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
     }
@@ -155,7 +166,9 @@ function showSearchHistory() {
     if (!searchArr.includes(searchList[i])) {
       searchArr.push(searchList[i].search)
     }
+    console.log(searchArr)
   }
+  searchArr.sort()
   for (let j = 0; j < searchArr.length; j++) {
     cityButtonHTML.push(
       `<div class="btn btn-dark btn-block capitalize" id="${searchArr[j]}"> ${searchArr[j]}</div>`
@@ -167,9 +180,11 @@ function showSearchHistory() {
 
 /**  start weather search */
 const startWeatherSearch = () => {
-  city = searchInput.value.toLowerCase()
-  fetchCity(geoCodeURL)
-  searchHistory()
+  let city = searchInput.value.toLowerCase()
+  const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+
+  fetchCity(geoCodeURL, city)
+//   searchHistory()
 }
 /** ------------EVENT LISTENERS---------- */
 /** make enter work for the search */
