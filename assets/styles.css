@@ -34,11 +34,14 @@
     background-color: navy;
 }
 
+/* @media screen and (max-width:1020px) {
+.card-columns{
+    column-count: 5;
+}
+} */
 /* tablet*/
-@media screen and (max-width:780px) {
-    .card {
-        width: 120px;
-    }
+@media screen and (max-width:820px) {
+  
 
     #current-weather img {
         width: 100% !important;
@@ -46,6 +49,13 @@
 
     .card img {
         width: 100% !important
+    }
+    .card{
+        min-width:180px;
+        max-width: 180px;
+        margin-top: 10px;
+
+    
     }
 }
 
@@ -61,7 +71,10 @@
     }
 
     .card {
+        min-width: none;
+        max-width: none;
         width: 100%
+
     }
 
 

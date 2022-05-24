@@ -88,7 +88,7 @@ function fiveDayForcast(data) {
           <div class="card-text mt-2"><h5> Temp: ${Math.round(
             data.daily[i].temp.day
           )}°</h5></div>
-          <div class="card-text"> < Wind: ${Math.round(
+          <div class="card-text"> Wind: ${Math.round(
             data.daily[i].wind_speed
           )} mph </div>
           <div class="card-text"> Humid: ${data.daily[i].humidity}%</div>
@@ -160,7 +160,7 @@ function showSearchHistory() {
     // console.log(searchArr)
   }
   // searchArr.sort()
-  for (let j = 0; j < 4; j++) {
+  for (let j = 0; j < searchArr.length; j++) {
     cityButtonHTML.push(
       `<div class="btn bg-grey btn-block capitalize" id="${searchArr[j]}"> ${searchArr[j]}</div>`
     )
