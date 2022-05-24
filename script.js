@@ -21,10 +21,8 @@ let lat
 let lon
 let cardHTML = []
 let timezone
-// let city="mombasa"
 
-/** FETCH CITY URL */
-// const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+
 
 /**------- FETCH FUNCTIONS--------- */
 
@@ -46,7 +44,7 @@ const fetchCity = (URL, city) => {
      
      }
      else {
-         alert('Not a valid city, please try again')
+         alert('☹️ City not found, please try again')
          searchInput.value =''
      }
     })
@@ -88,16 +86,16 @@ function fiveDayForcast(data) {
     cardHTML.push(`
       <div class="card text-white background">
       <div class="card-title pt-3 mx-auto"> <h4>${dateFormat} </h4></div>
-      <div class="card-body">
+      <div class="card-body mx-auto">
           <img src="http://openweathermap.org/img/wn/${
             data.daily[i].weather[0].icon
-          }@2x.png" alt="weather icon" class="mx-auto my-0" >
-          <div class="card-text"> Temp: ${Math.round(
+          }@2x.png" alt="weather icon" class="mx-auto my-auto" >
+          <div class="card-text mt-2"><h5> Temp: ${Math.round(
             data.daily[i].temp.day
-          )}°</div>
-          <div class="card-text"> Wind: ${Math.round(
+          )}°</h5></div>
+          <div class="card-text"> < Wind: ${Math.round(
             data.daily[i].wind_speed
-          )} mph</div>
+          )} mph </div>
           <div class="card-text"> Humid: ${data.daily[i].humidity}%</div>
       </div>
   </div>`)
@@ -151,7 +149,6 @@ function renderSearchHistory() {
       allSearch.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
     }
   }
-  console.log(allSearch)
 
   return allSearch
 }
@@ -166,18 +163,17 @@ function showSearchHistory() {
     if (!searchArr.includes(searchList[i])) {
       searchArr.push(searchList[i].search)
     }
-    console.log(searchArr)
+    // console.log(searchArr)
   }
-  searchArr.sort()
-  for (let j = 0; j < searchArr.length; j++) {
+  // searchArr.sort()
+  for (let j = 0; j < 4; j++) {
     cityButtonHTML.push(
-      `<div class="btn btn-dark btn-block capitalize" id="${searchArr[j]}"> ${searchArr[j]}</div>`
+      `<div class="btn bg-grey btn-block capitalize" id="${searchArr[j]}"> ${searchArr[j]}</div>`
     )
     // console.log(cityButtonHTML)
   }
   cityButtons.innerHTML = cityButtonHTML.join("")
 }
-
 /**  start weather search */
 const startWeatherSearch = () => {
   let city = searchInput.value.toLowerCase()
@@ -186,6 +182,8 @@ const startWeatherSearch = () => {
   fetchCity(geoCodeURL, city)
 //   searchHistory()
 }
+
+
 /** ------------EVENT LISTENERS---------- */
 /** make enter work for the search */
 searchInput.addEventListener("keypress", (event) => {
@@ -194,3 +192,10 @@ searchInput.addEventListener("keypress", (event) => {
   }
 })
 searchButton.addEventListener("click", startWeatherSearch)
+
+/** search history buttons give new results */
+cityButtons.addEventListener('click', (event) => {
+ let city= event.target.id
+ const geoCodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+fetchCity(geoCodeURL, city)
+})

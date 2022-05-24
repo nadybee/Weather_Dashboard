@@ -3,16 +3,17 @@
     padding: 0;
     font-family:'Franklin Gothic Medium', Arial, sans-serif
 }
-h1 {
-    color: blueviolet;
-}
+
 
 .gradient-color{
-    background-image: linear-gradient(to right, rgb(4, 172, 228) , rgb(77, 77, 187));
+    background-image: linear-gradient(to right, rgb(4, 172, 228) , rgb(35, 35, 68));
 }
-
+.my-container {
+    width:90%;
+    margin: auto
+}
 .background{
-    background-color: rgb(121, 119, 134);
+    background-color:rgb(35, 35, 68);
 }
 
 .capitalize{
@@ -21,4 +22,43 @@ h1 {
 
 .bg-orange{
     background-color: orange;
+}
+
+.bg-grey{
+    background-color: lightgrey;
+}
+
+.bg-navy{
+    background-color: navy;
+}
+
+/* tablet*/
+@media screen and (max-width:780px) {
+.card {
+    width: 120px;
+}
+#current-weather img {
+    width:100% !important;
+}
+.card img {
+    width: 100% !important
+}
+}
+
+/* phone*/
+@media screen and (max-width:480px) {
+ 
+.my-container{
+    width: 100%;
+}
+
+h1{
+    font-size: 24px !important;
+}
+.card {
+    width: 100%
+}
+
+
+
 }
