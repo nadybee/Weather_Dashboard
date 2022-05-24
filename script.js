@@ -64,7 +64,7 @@ function currentForcast(data, city) {
   let currentIcon = data.current.weather[0].icon
 
   currentCity.innerHTML = `<div class="d-flex capitalize"> <h3> ${city} (${todayDate})</h3>`
-  currentWeather.innerHTML = ` <img src="http://openweathermap.org/img/wn/${currentIcon}@4x.png" alt="weather icon" class="mx-auto" > </div>`
+  currentWeather.innerHTML = ` <img src="https://openweathermap.org/img/wn/${currentIcon}@4x.png" alt="weather icon" class="mx-auto" > </div>`
   currentTemp.innerHTML = `<h4> Temp: ${data.current.temp} °F`
   currentWind.innerHTML = `<h4> Wind: ${data.current.wind_speed} mph`
   currentHumid.innerHTML = `<h4> Humidity: ${data.current.humidity} %`
@@ -82,7 +82,7 @@ function fiveDayForcast(data) {
       <div class="card text-white background">
       <div class="card-title pt-3 mx-auto"> <h4>${dateFormat} </h4></div>
       <div class="card-body mx-auto">
-          <img src="http://openweathermap.org/img/wn/${
+          <img src="https://openweathermap.org/img/wn/${
             data.daily[i].weather[0].icon
           }@2x.png" alt="weather icon" class="mx-auto my-auto" >
           <div class="card-text mt-2"><h5> Temp: ${Math.round(
