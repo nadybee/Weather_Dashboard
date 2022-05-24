@@ -1,63 +1,68 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family:'Franklin Gothic Medium', Arial, sans-serif
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif
 }
 
 
-.gradient-color{
-    background-image: linear-gradient(to right, rgb(4, 172, 228) , rgb(35, 35, 68));
+.gradient-color {
+    background-image: linear-gradient(to right, rgb(4, 172, 228), rgb(35, 35, 68));
 }
+
 .my-container {
-    width:90%;
+    width: 90%;
     margin: auto
 }
-.background{
-    background-color:rgb(35, 35, 68);
+
+.background {
+    background-color: rgb(35, 35, 68);
 }
 
-.capitalize{
+.capitalize {
     text-transform: capitalize;
 }
 
-.bg-orange{
+.bg-orange {
     background-color: orange;
 }
 
-.bg-grey{
+.bg-grey {
     background-color: lightgrey;
 }
 
-.bg-navy{
+.bg-navy {
     background-color: navy;
 }
 
 /* tablet*/
 @media screen and (max-width:780px) {
-.card {
-    width: 120px;
-}
-#current-weather img {
-    width:100% !important;
-}
-.card img {
-    width: 100% !important
-}
+    .card {
+        width: 120px;
+    }
+
+    #current-weather img {
+        width: 100% !important;
+    }
+
+    .card img {
+        width: 100% !important
+    }
 }
 
 /* phone*/
 @media screen and (max-width:480px) {
- 
-.my-container{
-    width: 100%;
-}
 
-h1{
-    font-size: 24px !important;
-}
-.card {
-    width: 100%
-}
+    .my-container {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 24px !important;
+    }
+
+    .card {
+        width: 100%
+    }
 
 
 
