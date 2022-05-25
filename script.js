@@ -49,7 +49,7 @@ const fetchCity = (URL, city) => {
     })
     .catch((error)=>{
       console.log(error)
-      
+
     })
 }
 /** FUNCTION TO FETCH WEATHER: CALLED IN fetchCity() */
@@ -179,7 +179,7 @@ function showSearchHistory() {
 /**  start weather search */
 const startWeatherSearch = () => {
   let city = searchInput.value.toLowerCase()
-  const geoCodeURL = `https://pi.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+  const geoCodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
 
   fetchCity(geoCodeURL, city)
   //   searchHistory()
