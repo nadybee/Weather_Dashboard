@@ -28,6 +28,9 @@ let timezone
 const fetchCity = (URL, city) => {
   fetch(URL)
     .then(function (response) {
+      if(!response.ok){ 
+        throw Error(response.statusText)
+      }
       return response.json()
     })
     .then(function (data) {
@@ -42,6 +45,11 @@ const fetchCity = (URL, city) => {
         alert("☹️ City not found, please try again")
         searchInput.value = ""
       }
+
+    })
+    .catch((error)=>{
+      console.log(error)
+      
     })
 }
 /** FUNCTION TO FETCH WEATHER: CALLED IN fetchCity() */
@@ -171,7 +179,7 @@ function showSearchHistory() {
 /**  start weather search */
 const startWeatherSearch = () => {
   let city = searchInput.value.toLowerCase()
-  const geoCodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+  const geoCodeURL = `https://pi.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
 
   fetchCity(geoCodeURL, city)
   //   searchHistory()
