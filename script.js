@@ -49,6 +49,7 @@ const fetchCity = (URL, city) => {
     })
     .catch((error)=>{
       console.log(error)
+      alert('there was an error, please try again later')
 
     })
 }
