@@ -83,7 +83,7 @@ function currentForcast(data, city) {
 /* FUNCTION TO ADD 5 DAY FORCAST CARDS TO PAGE: called in fetchWeather() */
 function fiveDayForcast(data) {
   cardHTML = []
-  for (let i = 0; i < 5; i++) {
+  for (let i = 1; i < 6; i++) {
     let dates = new Date(data.daily[i].dt * 1000)
     let dateFormat = dayjs(dates).format("ddd DD")
 
@@ -201,3 +201,4 @@ cityButtons.addEventListener("click", (event) => {
   const geoCodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
   fetchCity(geoCodeURL, city)
 })
+showSearchHistory()
